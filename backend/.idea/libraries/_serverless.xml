@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name=".serverless">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.serverless/custom-resources.zip!/" />
+      <root url="jar://$PROJECT_DIR$/.serverless/serverless-todo-app.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
