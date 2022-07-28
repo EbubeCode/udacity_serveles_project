@@ -11,9 +11,22 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     const authorization = event.headers.Authorization;
     const split = authorization.split(' ');
     const jwtToken = split[1];
+    const updatedTodo: UpdateTodoRequest = JSON.parse(event.body);
+
+    if (updatedTodo.name === "" || updatedTodo.dueDate === "")
+        return {
+            statusCode: 400,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Credentials': true
+            },
+            body: JSON.stringify({
+                "message": "invalid schema"
+            }),
+        }
 
     const todoId = event.pathParameters.todoId;
-    const updatedTodo: UpdateTodoRequest = JSON.parse(event.body);
+
 
     const todoItem = await updateToDo(updatedTodo, todoId, jwtToken);
     logger.info("Todo Updated", todoItem);

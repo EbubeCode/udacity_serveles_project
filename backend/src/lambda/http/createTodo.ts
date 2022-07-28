@@ -15,6 +15,17 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     const jwtToken = split[1];
 
 
+    if (newTodo.name === "" || newTodo.dueDate === "")
+        return {
+            statusCode: 400,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Credentials': true
+            },
+            body: JSON.stringify({
+                "message": "invalid schema"
+            }),
+        }
     const newItem = await createToDo(newTodo, jwtToken);
     logger.info("Created new todo", newItem);
     return {
